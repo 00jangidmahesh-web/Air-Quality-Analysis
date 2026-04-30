@@ -5,18 +5,13 @@ import plotly.express as px
 
 # Page Config Setup
 st.set_page_config(page_title="Air Quality Dashboard", layout="wide")
-st.title("🌍 Air Quality Analysis & Pollution Monitoring System")
+st.title(" Air Quality Analysis & Pollution Monitoring System")
 
 # Data Loading & Cleaning Function
 @st.cache_data 
 def load_data():
-    # Option 1: Agar file GitHub repo mein hi hai (Recommended for 1929 rows)
-    file_path = "https://drive.google.com/file/d/1-S0nsOpV-ujkfdIIC74biEt3oYQEp4cN/view?usp=drive_link" 
-    
-    # Option 2: Agar Google Drive se lena hai, toh Drive ka 'Direct Download Link' yahan daalo
-    # file_path = "https://drive.google.com/uc?id=TUMHARI_FILE_KA_ID"
-    
-    df = pd.read_csv(file_path)
+    # Ab hum CSV ki jagah choti aur fast Parquet file read kar rahe hain
+    df = pd.read_parquet('data.parquet')
     
     # --- Data Cleaning ---
     df.replace('NA', np.nan, inplace=True)
